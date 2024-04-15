@@ -26,7 +26,7 @@ public class obstaclesGenerator : MonoBehaviour
     void spawn()
     {
         float x = Random.Range(minX, maxY);
-        float y = Random.Range(minY, maxY);
+        float y = Random.Range(minY,maxY);
         Instantiate(obstacles, transform.position + new Vector3(x, y, 0), transform.rotation);
     }
 }
