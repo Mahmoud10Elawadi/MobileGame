@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraMovement : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     public float cameraSpeed;
 
-    // Update is called once per frame
     void Update()
     {
+        // Move the camera vertically along the y-axis
         transform.position += new Vector3(0, cameraSpeed * Time.deltaTime, 0);
     }
 }
