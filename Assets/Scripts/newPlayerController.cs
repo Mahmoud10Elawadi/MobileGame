@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using System.Collections;
+using System.Collections.Generic;
 [RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
 public class newPlayerController : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class newPlayerController : MonoBehaviour
     public float runSpeed = 8f;
     public float airWalkSpeed = 3f;
     public float jumpImpulse = 10f;
-
+    [SerializeField] PlayerAttackHandler attackHandler;
     Vector2 moveInput;
     TouchingDirections touchingDirections;
     public float CurrentMoveSpeed
@@ -106,6 +107,15 @@ public class newPlayerController : MonoBehaviour
         }
     }
 
+    public bool IsAlive
+    {
+        get 
+        
+        {
+            return animator.GetBool(AnimationStrings.isAlive);
+        }
+    }
+
     Rigidbody2D rb;
     Animator animator;
 
@@ -114,16 +124,6 @@ public class newPlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
-    }
-    void Start()
-    {
-
-
-    }
-
-    void Update()
-    {
-
     }
 
     private void FixedUpdate()
@@ -135,8 +135,16 @@ public class newPlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
-        SetFacingDirection(moveInput);
+        if (IsAlive)
+        {
+            IsMoving = moveInput != Vector2.zero;
+            SetFacingDirection(moveInput);
+        }
+        else
+        {
+            IsMoving = false;
+        }
+
     }
 
     private void SetFacingDirection(Vector2 moveInput)
@@ -178,9 +186,16 @@ public class newPlayerController : MonoBehaviour
     {
         if (context.started)
         {
+            attackHandler.SetModeState(true);
+            StartCoroutine(StopAttackMode());
             animator.SetTrigger(AnimationStrings.attackTrigger);
         }
+       
 
+    }
+    private IEnumerator StopAttackMode() {
+        yield return new WaitForSeconds(2f);   
+        attackHandler.SetModeState(false);
     }
 }
 
