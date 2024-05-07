@@ -111,6 +111,7 @@ public class Authmanager : MonoBehaviour
             Debug.LogFormat("User signed in successfully: {0} ({1})", User.DisplayName, User.Email);
             warningLoginText.text = "";
             confirmLoginText.text = "Logged In";
+            SceneManager.LoadScene("MainMenu");
             Debug.Log("pressed");
         }
     }
@@ -187,7 +188,7 @@ public class Authmanager : MonoBehaviour
                     {
                         //Username is now set
                         //Now return to login screen
-                        SceneManager.LoadScene(3);
+                        SceneManager.LoadScene("Login");
                         warningRegisterText.text = "";
                     }
                 }
