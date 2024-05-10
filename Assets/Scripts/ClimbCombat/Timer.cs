@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement; // Import SceneManager
 public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
-    [SerializeField] float remainingTime = 10;
+    [SerializeField] float remainingTime = 15;
     [SerializeField] string sceneToLoad; // Name of the scene to load
 
     // Update is called once per frame

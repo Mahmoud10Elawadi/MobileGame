@@ -27,6 +27,7 @@ public class SpwanManager : MonoBehaviour
         var tile = GetTitle();
         tile.SetManager(this);
         tile.SetPlayerTrans(playerTrans);
+        pos.x *= 0.5f;
         tile.transform.position = pos;
         tile.transform.rotation = Quaternion.identity;
         tile.transform.parent = placeHodler;
